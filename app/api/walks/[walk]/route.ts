@@ -28,16 +28,20 @@ export const trackCreator = (coordinates: Coordinates, places: Places) => {
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   const walk = req.url?.split("/").slice(-1)[0];
+  const walkDirectory = path.join(process.cwd(), "config");
 
   const placesOfInterest = JSON.parse(
     fs.readFileSync(
-      path.resolve(`./config/${walk}/pointsOfInterest.json`),
+      path.resolve(walkDirectory + `/${walk}/pointsOfInterest.json`),
       "utf-8"
     )
   );
 
   const route = JSON.parse(
-    fs.readFileSync(path.resolve(`./config/${walk}/route.json`), "utf-8")
+    fs.readFileSync(
+      path.resolve(walkDirectory + `/${walk}/route.json`),
+      "utf-8"
+    )
   );
 
   const track = trackCreator(route, placesOfInterest);

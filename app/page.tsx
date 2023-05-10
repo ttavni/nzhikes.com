@@ -1,19 +1,32 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-async function getWalks() {
-  const hikes = await fetch(`${process.env.BASE_URL}/api/getWalks`, {
-    method: "GET",
-    cache: "no-store",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((response) => response.json());
+export default function Home() {
+  const [hikes, setHikes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  return hikes;
-}
+  const fetchWalks = async () => {
+    setLoading(true);
+    await fetch(`/api/getWalks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setHikes(data.hikes);
+      });
 
-export default async function Home() {
-  const { hikes } = await getWalks();
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchWalks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
