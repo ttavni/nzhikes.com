@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dot-typing:after {
+  content: "...";
+  animation: ellipsis-animation 1s infinite;
+}
+
+@keyframes ellipsis-animation {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+}
