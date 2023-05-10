@@ -1,8 +1,11 @@
 import path from "path";
 import fs from "fs";
 import { NextResponse } from "next/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import { Coordinates, Places } from "@/components/utils/types";
+
+type RequestData = {
+  walk: string;
+};
 
 const pointCreator = (places: Places) => {
   const points = Object.keys(places).map((name) => ({
@@ -26,9 +29,8 @@ export const trackCreator = (coordinates: Coordinates, places: Places) => {
   };
 };
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const { walk } = req.query;
-  console.log(walk);
+export async function POST(request: Request) {
+  const { walk } = (await request.json()) as RequestData;
   const walkDirectory = path.join(process.cwd(), "config");
 
   const placesOfInterest = JSON.parse(

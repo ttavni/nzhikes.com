@@ -12,10 +12,13 @@ export default function Page({ params }: any) {
     setLoading(true);
 
     await fetch(`/api/walks/${walk}`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        walk: walk,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
