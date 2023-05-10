@@ -27,7 +27,8 @@ export const trackCreator = (coordinates: Coordinates, places: Places) => {
 };
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const walk = req.url?.split("/").slice(-1)[0];
+  const { walk } = req.query;
+  console.log(walk);
   const walkDirectory = path.join(process.cwd(), "config");
 
   const placesOfInterest = JSON.parse(
