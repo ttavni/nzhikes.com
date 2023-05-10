@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-2xl font-bold dark pb-5">Available Users:</h2>
+      <h2 className="text-2xl font-bold dark pb-5">Hikes:</h2>
       <div className="grid grid-cols-5 sm:grid-cols-5 gap-3">
         {hikes.map((hike: string) => (
           <Link key={hike} href={`/${hike}`}>
@@ -44,10 +44,7 @@ export default function Home() {
       </div>
       <footer className="fixed bottom-0 w-full text-center text-gray-600">
         <div className="py-2 text-xs">
-          <p>
-            * No responsibility is taken for the text generated. For
-            entertainment purposes only.
-          </p>
+          <p>* For scroggin munchers only</p>
         </div>
       </footer>
     </div>
