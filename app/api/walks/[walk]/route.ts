@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   const { walk } = (await request.json()) as RequestData;
   const walkDirectory = path.join(process.cwd(), "config");
 
-  const info = JSON.parse(
+  const { info, pointsOfInterest } = JSON.parse(
     fs.readFileSync(path.resolve(walkDirectory + `/${walk}/info.json`), "utf-8")
   );
 
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     )
   );
 
-  const track = trackCreator(route, info.pointsOfInterest);
+  const track = trackCreator(route, pointsOfInterest);
 
-  return NextResponse.json(track);
+  return NextResponse.json({ info, track });
 }

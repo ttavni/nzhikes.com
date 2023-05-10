@@ -3,7 +3,7 @@ import mapboxgl, { LngLatLike } from "mapbox-gl";
 
 import Metrics from "./Metrics";
 
-import { Coordinates, Route } from "./utils/types";
+import { Route } from "./utils/types";
 import { calculateTotalDistance } from "./utils/geometry";
 import { transformRequest } from "./utils/constants";
 import { useWindowScrollPositions } from "./utils/useScrollPosition";
@@ -17,9 +17,10 @@ import { LineString } from "@turf/turf";
 import { useScrollBlock } from "./utils/blockScroll";
 import { IntroCard } from "./IntroCard";
 
-const ScrollMap = ({ route }: { route: Route }) => {
+const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const { introTitle, url, chipMessages } = info;
 
   const [altitude, setAltitude] = useState(0);
   const [distance, setDistance] = useState(0);
@@ -153,7 +154,13 @@ const ScrollMap = ({ route }: { route: Route }) => {
   return (
     <>
       <div style={{ height: mapContainerHeight }}>
-        {index === 0 && <IntroCard />}
+        {index === 0 && (
+          <IntroCard
+            introTitle={introTitle}
+            url={url}
+            chipMessages={chipMessages}
+          />
+        )}
         <Metrics altitude={altitude} distance={distance} />
         <div className="h-screen w-screen fixed top-0" ref={mapContainerRef} />
       </div>

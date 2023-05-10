@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 import ScrollMap from "../../components/ScrollMap";
 
 export default function Page({ params }: any) {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [track, setTrack] = useState();
+  const [info, setInfo] = useState();
   const { walk } = params;
 
   const fetchWalk = async () => {
-    setLoading(true);
-
     await fetch(`/api/walks/${walk}`, {
       method: "POST",
       headers: {
@@ -22,10 +20,10 @@ export default function Page({ params }: any) {
     })
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
+        const { track, info } = data;
+        setTrack(track);
+        setInfo(info);
       });
-
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -33,11 +31,11 @@ export default function Page({ params }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!walk && !data) {
+  if (!walk && !track) {
     return <p>No walk found</p>;
   }
 
-  if (data) {
-    return <ScrollMap route={data} />;
+  if (track) {
+    return <ScrollMap route={track} info={info} />;
   }
 }
