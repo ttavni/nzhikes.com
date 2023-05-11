@@ -12,7 +12,7 @@ import * as turf from "@turf/turf";
 
 import { addPlaces } from "./utils/mapboxSources";
 
-import { updateBearing } from "./utils/mapControls";
+import { bearingDifferenceThreshold, updateBearing } from "./utils/mapControls";
 import { LineString } from "@turf/turf";
 import { useScrollBlock } from "./utils/blockScroll";
 import { IntroCard } from "./IntroCard";
@@ -24,6 +24,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
 
   const [altitude, setAltitude] = useState(0);
   const [distance, setDistance] = useState(0);
+  const [previousBearing, setPreviousBearing] = useState(0);
   const [blockScroll, allowScroll] = useScrollBlock();
 
   const { scrollY } = useWindowScrollPositions();
@@ -136,13 +137,20 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
       map.current.setZoom(13);
       map.current.setPitch(40);
       map.current.setCenter([center[0], center[1]]);
-      map.current.setBearing(updateBearing(index, routeCoordinates));
+
+      const newBearing = updateBearing(index, routeCoordinates);
+
+      if (bearingDifferenceThreshold(0.04269, previousBearing, newBearing)) {
+        map.current.setBearing(newBearing);
+      }
+
+      setPreviousBearing(newBearing);
 
       setDistance(calculateTotalDistance(routeCoordinates, index));
       const elevation = map.current.queryTerrainElevation(center as LngLatLike);
       setAltitude(Math.round(elevation || 0));
     }
-  }, [index, routeCoordinates]);
+  }, [index, routeCoordinates, previousBearing]);
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
