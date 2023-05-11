@@ -34,12 +34,12 @@ export default function Home() {
   return (
     <>
       <title>NZ Hikes</title>
-      <div className="flex flex-col items-center justify-center min-h-screen p-10">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <h2 className="text-2xl font-bold dark pb-5">Hikes:</h2>
         {loading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-5 sm:grid-cols-5 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-3 gap-5">
             {hikes.map((hike: string) => (
               <Link key={hike} href={`/${hike}`}>
                 <div className="relative">
