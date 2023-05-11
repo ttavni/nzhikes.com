@@ -4,10 +4,11 @@
     "chipMessages": [
       "🥾 53.5 km",
       "🕒 4 Days",
-      "🔸 Medium",
+      "🔸 Intermediate",
       "↕️ 1750m Elevation Gain",
       "⛔ One Way"
-    ]
+    ],
+    "reverseAble": false
   },
   "pointsOfInterest": {
     "Glade Wharf": [167.93017, -44.9321],

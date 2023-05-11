@@ -16,6 +16,7 @@ import { bearingDifferenceThreshold, updateBearing } from "./utils/mapControls";
 import { LineString } from "@turf/turf";
 import { useScrollBlock } from "./utils/blockScroll";
 import { IntroCard } from "./IntroCard";
+import { ProgressBar } from "./Progress";
 
 const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
@@ -25,11 +26,9 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const [altitude, setAltitude] = useState(0);
   const [distance, setDistance] = useState(0);
   const [previousBearing, setPreviousBearing] = useState(0);
-  const [blockScroll, allowScroll] = useScrollBlock();
 
   const { scrollY } = useWindowScrollPositions();
   const index = Math.round(scrollY / 10);
-
   const routeCoordinates = (route.features[0].geometry as LineString)
     .coordinates;
 
@@ -67,10 +66,6 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
         type: "FeatureCollection",
         features: route.features.slice(1, -1),
       });
-    });
-
-    map.current.on("sourcedata", (e) => {
-      allowScroll();
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -135,12 +130,12 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
       );
 
       map.current.setZoom(13);
-      map.current.setPitch(40);
+      map.current.setPitch(50);
       map.current.setCenter([center[0], center[1]]);
 
       const newBearing = updateBearing(index, routeCoordinates);
 
-      if (bearingDifferenceThreshold(0.04269, previousBearing, newBearing)) {
+      if (bearingDifferenceThreshold(0.035, previousBearing, newBearing)) {
         map.current.setBearing(newBearing);
       }
 
@@ -157,8 +152,8 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   };
 
   const height = Math.round(routeCoordinates.length * 10.265);
-  console.log(scrollY);
   const mapContainerHeight = `${height}px`;
+  const progress = (index / routeCoordinates.length) * 100;
 
   return (
     <>
@@ -170,6 +165,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
             chipMessages={chipMessages}
           />
         )}
+        <ProgressBar progress={progress} />
         <Metrics altitude={altitude} distance={distance} />
         <div className="h-screen w-screen fixed top-0" ref={mapContainerRef} />
       </div>

@@ -1,41 +1,60 @@
 "use client";
 
+import { ReverseToggle } from "@/components/ControlPanel";
+import ErrorPage from "@/components/ErrorPage";
 import { useEffect, useState } from "react";
 import ScrollMap from "../../components/ScrollMap";
 
 export default function Page({ params }: any) {
   const [track, setTrack] = useState();
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState({ reverseAble: false });
+  const [loading, setLoading] = useState(false);
+  const [toggleReverse, setToggleReverse] = useState(false);
   const { walk } = params;
 
   const fetchWalk = async () => {
-    await fetch(`/api/walks/${walk}`, {
+    setLoading(true);
+    const response = await fetch(`/api/walks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         walk: walk,
+        reverse: toggleReverse,
       }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const { track, info } = data;
-        setTrack(track);
-        setInfo(info);
-      });
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const { track, info } = data;
+      setTrack(track);
+      setInfo(info);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchWalk();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [toggleReverse]);
 
-  if (!walk && !track) {
-    return <p>No walk found</p>;
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
-  if (track) {
-    return <ScrollMap route={track} info={info} />;
+  if (!track) {
+    return <ErrorPage />;
   }
+
+  return (
+    <>
+      <ScrollMap route={track} info={info} />
+      {info.reverseAble && (
+        <ReverseToggle
+          toggleReverse={toggleReverse}
+          setToggleReverse={setToggleReverse}
+        />
+      )}
+    </>
+  );
 }

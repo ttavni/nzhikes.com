@@ -1,0 +1,23 @@
+{
+  "info": {
+    "introTitle": "Kepler Track",
+    "chipMessages": [
+      "🥾 60 km",
+      "🕒 3-4 Days",
+      "🔸 Intermediate",
+      "↕️ 2170m Elevation Gain",
+      "🔁 Loop"
+    ],
+    "reverseAble": true
+  },
+  "pointsOfInterest": {
+    "Kepler Track Carpark": [167.68893, -45.44242],
+    "Brod Bay Campsite": [167.67451, -45.40437],
+    "Luxmore Hut": [167.61926, -45.38523],
+    "Forest Burn Emergency Shelter": [167.57184, -45.38946],
+    "Hanging Valley Shelter": [167.53618, -45.38285],
+    "Iris Burn Hut": [167.50975, -45.3989],
+    "Moturau Hut": [167.61066, -45.48189],
+    "Rainbow Reach Carpark": [167.66372, -45.49171]
+  }
+}

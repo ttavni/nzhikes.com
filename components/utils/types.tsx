@@ -8,4 +8,15 @@ export interface Places {
   [key: string]: [number, number];
 }
 
+export interface GeoJSON {
+  type: string;
+  geometry: {
+    type: string;
+    coordinates: number[][];
+  };
+  properties: {
+    name: string;
+  };
+}
+
 export type Route = FeatureCollection<Geometry, GeoJsonProperties>;

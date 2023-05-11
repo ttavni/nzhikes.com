@@ -1,0 +1,23 @@
+{
+  "info": {
+    "introTitle": "Routeburn Track",
+    "chipMessages": [
+      "🥾 53.5 km",
+      "🕒 4 Days",
+      "🔸 Intermediate",
+      "↕️ 1750m Elevation Gain",
+      "⛔ Loop"
+    ],
+    "reverseAble": true
+  },
+  "pointsOfInterest": {
+    "Routeburn Shelter": [168.27844, -44.71906],
+    "Routeburn Flats Hut": [168.21557, -44.72585],
+    "Routeburn Flats Campsite": [168.2132, -44.72485],
+    "Routeburn Falls Hut": [168.19942, -44.72579],
+    "Harris Saddle Shelter": [168.17058, -44.72694],
+    "Lake Mackenzie Hut": [168.17339, -44.76759],
+    "Lake Mackenzie Campsite": [168.17655, -44.76377],
+    "The Divide Shelter": [168.1177, -44.82499]
+  }
+}
