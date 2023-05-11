@@ -148,8 +148,9 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     window.scrollTo(0, 0);
   };
 
-  const height = Math.round(routeCoordinates.length * 1.09477124183);
-  const mapContainerHeight = `${height}vh`;
+  const height = Math.round(routeCoordinates.length * 10.265);
+  console.log(scrollY);
+  const mapContainerHeight = `${height}px`;
 
   return (
     <>

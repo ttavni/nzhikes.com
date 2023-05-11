@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 export const useWindowScrollPositions = () => {
-  const [scrollPosition, setPosition] = useState({ scrollY: 0 });
+  const [scrollY, setPosition] = useState(0);
 
   useEffect(() => {
     function updatePosition() {
-      setPosition({ scrollY: window.scrollY });
+      setPosition(window.scrollY);
     }
 
     window.addEventListener("scroll", updatePosition);
@@ -14,5 +14,10 @@ export const useWindowScrollPositions = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  return scrollPosition;
+  // useEffect(() => {
+  //   // Calculate the height based on the scroll position
+  //   const height = Math.max(3000, window.scrollY + window.innerHeight);
+  // }, [scrollPosition]);
+
+  return { scrollY };
 };
