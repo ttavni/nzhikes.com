@@ -1,0 +1,18 @@
+{
+  "info": {
+    "introTitle": "Boundary Creek Track",
+    "chipMessages": [
+      "🥾 13 km",
+      "🕒 3.5 Hours",
+      "🔸 Intermediate",
+      "↕️ 396 Elevation Gain",
+      "⛔ Point to point"
+    ],
+    "reverseAble": false
+  },
+  "pointsOfInterest": {
+    "Carpark": [171.16166, -43.58522],
+    "Boundary Creek Hut": [171.07112, -43.52957],
+    "Boundary Hut": [171.07112, -43.52957]
+  }
+}

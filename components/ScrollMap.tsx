@@ -177,9 +177,11 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     window.scrollTo(0, 0);
   };
 
-  const height = Math.round(routeCoordinates.length * 10.265);
+  const heightMultiplier = introTitle === "Boundary Creek Track" ? 12.6 : 10.27;
+
+  const height = Math.round(routeCoordinates.length * heightMultiplier);
   const mapContainerHeight = `${height}px`;
-  const progress = (index / routeCoordinates.length) * 100;
+  const progress = Math.min((index / routeCoordinates.length) * 100, 100);
 
   return (
     <>
