@@ -14,7 +14,6 @@ import { addPlaces } from "./utils/mapboxSources";
 
 import { bearingDifferenceThreshold, updateBearing } from "./utils/mapControls";
 import { LineString } from "@turf/turf";
-import { useScrollBlock } from "./utils/blockScroll";
 import { IntroCard } from "./IntroCard";
 import { ProgressBar } from "./Progress";
 
@@ -66,6 +65,33 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
         type: "FeatureCollection",
         features: route.features.slice(1, -1),
       });
+
+      if (index === 0) {
+        // Add initial route when
+        // Add initial route when index is 0
+        const { movingLine } = driveRoute(
+          routeCoordinates,
+          routeCoordinates.length
+        );
+
+        if (map.current) {
+          map.current.addSource("initialRoute", {
+            type: "geojson",
+            data: movingLine as Route,
+          });
+
+          map.current.addLayer({
+            id: "initialLine",
+            type: "line",
+            source: "initialRoute",
+            paint: {
+              "line-opacity": 0.6,
+              "line-color": "red",
+              "line-width": 1,
+            },
+          });
+        }
+      }
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

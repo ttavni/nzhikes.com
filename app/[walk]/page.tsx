@@ -48,6 +48,7 @@ export default function Page({ params }: any) {
 
   return (
     <>
+      <title>Hiking Track</title>
       <ScrollMap route={track} info={info} />
       {info.reverseAble && (
         <ReverseToggle
