@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <title>NZ Hikes</title>
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-screen p-10">
         <h2 className="text-2xl font-bold dark pb-5">Hikes:</h2>
         {loading ? (
           <Loader />
