@@ -11,7 +11,7 @@ const Metrics = ({
 }) => {
   return (
     <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center bg-gray-800 rounded-lg h-8 z-50 font-orbitron w-40">
-      <div className="flex justify-center items-center w-full pb-2">
+      <div className="flex justify-center items-center w-full pb-4">
         <p className="text-white text-sm md:text-base mr-2">{`${altitude}m`}</p>
         <p
           className="text-white text-base md:text-lg"

@@ -17,7 +17,6 @@ import {
 } from "../utils/mapControls";
 import { LineString } from "@turf/turf";
 import { IntroCard } from "./IntroCard";
-import { ProgressBar } from "./Progress";
 import { useScrollTracker } from "react-scroll-tracker";
 import Link from "next/link";
 
@@ -191,12 +190,14 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   return (
     <>
       <title>{introTitle}</title>
-      <Link
-        href="/"
-        className="fixed right-5 p-1 top-5 z-50 text-md font-semibold text-gray-800 bg-gray-100 border border-gray-200 dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
-      >
-        <kbd>← Home</kbd>
-      </Link>
+      {index !== 0 && (
+        <Link
+          href="/"
+          className="fixed right-5 p-1 top-5 z-50 text-md font-semibold text-gray-800 bg-gray-100 border border-gray-200 dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
+        >
+          <kbd>← Home</kbd>
+        </Link>
+      )}
       <div style={{ height: `${mapContainerHeight}px` }}>
         {index === 0 && (
           <IntroCard
