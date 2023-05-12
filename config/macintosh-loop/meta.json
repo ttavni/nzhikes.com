@@ -1,0 +1,16 @@
+{
+  "info": {
+    "introTitle": "McIntosh Loop Track",
+    "chipMessages": [
+      "🥾 18.8 km",
+      "🕒 8.5 Hours",
+      "♦️ Hard",
+      "↕️ 1411m Elevation Gain",
+      "🔁 Loop"
+    ],
+    "reverseAble": true
+  },
+  "pointsOfInterest": {
+    "Carpark": [168.41068, -44.74017]
+  }
+}

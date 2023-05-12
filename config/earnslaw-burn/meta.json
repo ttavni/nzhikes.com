@@ -1,0 +1,16 @@
+{
+  "info": {
+    "introTitle": "Earnslaw Burn Track",
+    "chipMessages": [
+      "🥾 24 km",
+      "🕒 6 Hours (Each Way)",
+      "♦️ Hard",
+      "↕️ 853 Elevation Gain",
+      "⛔ Out & Back"
+    ],
+    "reverseAble": false
+  },
+  "pointsOfInterest": {
+    "Carpark": [168.41068, -44.74017]
+  }
+}

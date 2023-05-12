@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { NextResponse } from "next/server";
-import { Coordinates, Places, GeoJSON } from "@/components/utils/types";
+import { Coordinates, Places, GeoJSON } from "@/utils/types";
 
 type RequestData = {
   walk: string;

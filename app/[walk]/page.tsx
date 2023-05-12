@@ -7,13 +7,12 @@ import ScrollMap from "../../components/ScrollMap";
 
 export default function Page({ params }: any) {
   const [track, setTrack] = useState();
+  const [error, setError] = useState(false);
   const [info, setInfo] = useState({ reverseAble: false });
-  const [loading, setLoading] = useState(false);
   const [toggleReverse, setToggleReverse] = useState(false);
   const { walk } = params;
 
   const fetchWalk = async () => {
-    setLoading(true);
     const response = await fetch(`/api/walks`, {
       method: "POST",
       headers: {
@@ -29,8 +28,9 @@ export default function Page({ params }: any) {
       const { track, info } = data;
       setTrack(track);
       setInfo(info);
+    } else {
+      setError(true);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -38,17 +38,16 @@ export default function Page({ params }: any) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleReverse]);
 
-  if (loading) {
+  if (!track) {
     return <p>Loading...</p>;
   }
 
-  if (!track) {
+  if (!track || error) {
     return <ErrorPage />;
   }
 
   return (
     <>
-      <title>Hiking Track</title>
       <ScrollMap route={track} info={info} />
       {info.reverseAble && (
         <ReverseToggle

@@ -1,8 +1,7 @@
 "use client";
 
-import { InfoChips } from "@/components/IntroCard";
 import { Loader } from "@/components/Loading";
-import Head from "next/head";
+import { formatText } from "@/utils/formatText";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -39,11 +38,13 @@ export default function Home() {
         {loading ? (
           <Loader />
         ) : (
-          <div className="grid grid-cols-3 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-3">
             {hikes.map((hike: string) => (
               <Link key={hike} href={`/${hike}`}>
-                <div className="relative">
-                  <InfoChips chipMessage={hike} />
+                <div className="relative border-2 border-gray-300 rounded-md p-4 hover:bg-gray-100 transition-colors duration-200 ease-in-out">
+                  <h2 className="text-sm text-center font-medium">
+                    {formatText(hike)}
+                  </h2>
                 </div>
               </Link>
             ))}

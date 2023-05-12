@@ -3,19 +3,23 @@ import mapboxgl, { LngLatLike } from "mapbox-gl";
 
 import Metrics from "./Metrics";
 
-import { Route } from "./utils/types";
-import { calculateTotalDistance } from "./utils/geometry";
-import { transformRequest } from "./utils/constants";
-import { useWindowScrollPositions } from "./utils/useScrollPosition";
-import { driveRoute, geojsonPoint } from "./utils/drive";
+import { Route } from "../utils/types";
+import { calculateTotalDistance } from "../utils/geometry";
+import { transformRequest } from "../utils/constants";
+import { driveRoute, geojsonPoint } from "../utils/drive";
 import * as turf from "@turf/turf";
 
-import { addPlaces } from "./utils/mapboxSources";
+import { addPlaces } from "../utils/mapboxSources";
 
-import { bearingDifferenceThreshold, updateBearing } from "./utils/mapControls";
+import {
+  bearingDifferenceThreshold,
+  updateBearing,
+} from "../utils/mapControls";
 import { LineString } from "@turf/turf";
 import { IntroCard } from "./IntroCard";
 import { ProgressBar } from "./Progress";
+import { useScrollTracker } from "react-scroll-tracker";
+import Link from "next/link";
 
 const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
@@ -26,8 +30,6 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const [distance, setDistance] = useState(0);
   const [previousBearing, setPreviousBearing] = useState(0);
 
-  const { scrollY } = useWindowScrollPositions();
-  const index = Math.round(scrollY / 10);
   const routeCoordinates = (route.features[0].geometry as LineString)
     .coordinates;
 
@@ -35,8 +37,13 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     .reduce((acc, val) => [acc[0] + val[0], acc[1] + val[1]], [0, 0])
     .map((sum) => sum / routeCoordinates.length);
 
+  const { scrollY } = useScrollTracker();
+  const mapContainerHeight = routeCoordinates.length * 15;
+  const index = Math.floor((scrollY * routeCoordinates.length) / 100);
+
   useEffect(() => {
     // Create the Mapbox map instance
+    document.body.style.overflow = "hidden"; //  disable scrolling
     mapboxgl.accessToken = process.env.MAPBOX_TOKEN as string;
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current!,
@@ -63,7 +70,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     map.current.on("load", () => {
       addPlaces(map, {
         type: "FeatureCollection",
-        features: route.features.slice(1, -1),
+        features: route.features.slice(1),
       });
 
       if (index === 0) {
@@ -137,6 +144,8 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
             });
           }
         }
+
+        document.body.style.overflow = "unset"; //  allow scrolling once everything loaded
       });
 
     const { movingLine, center } = driveRoute(routeCoordinates, index);
@@ -177,15 +186,18 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     window.scrollTo(0, 0);
   };
 
-  const heightMultiplier = introTitle === "Boundary Creek Track" ? 12.6 : 10.27;
-
-  const height = Math.round(routeCoordinates.length * heightMultiplier);
-  const mapContainerHeight = `${height}px`;
   const progress = Math.min((index / routeCoordinates.length) * 100, 100);
 
   return (
     <>
-      <div style={{ height: mapContainerHeight }}>
+      <title>{introTitle}</title>
+      <Link
+        href="/"
+        className="fixed right-5 p-1 top-5 z-50 text-md font-semibold text-gray-800 bg-gray-100 border border-gray-200 dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
+      >
+        <kbd>← Home</kbd>
+      </Link>
+      <div style={{ height: `${mapContainerHeight}px` }}>
         {index === 0 && (
           <IntroCard
             introTitle={introTitle}
@@ -193,8 +205,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
             chipMessages={chipMessages}
           />
         )}
-        <ProgressBar progress={progress} />
-        <Metrics altitude={altitude} distance={distance} />
+        <Metrics progress={progress} altitude={altitude} distance={distance} />
         <div className="h-screen w-screen fixed top-0" ref={mapContainerRef} />
       </div>
     </>

@@ -12,7 +12,7 @@ export const ReverseToggle = ({
   };
 
   return (
-    <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 flex justify-center items-center bg-gray-800 rounded-lg h-8 z-50 font-orbitron w-40">
+    <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 flex justify-center items-center bg-gray-800 rounded-lg h-8 z-50 w-40">
       <div className="flex justify-center items-center bg-gray-800 rounded-lg h-8 z-50 font-orbitron w-full p-4">
         <label className="relative inline-flex items-center mr-5 cursor-pointer">
           <input
