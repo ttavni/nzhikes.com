@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import mapboxgl, { LngLatLike } from "mapbox-gl";
+import mapboxgl, { LngLatBounds, LngLatLike } from "mapbox-gl";
 
 import Metrics from "./Metrics";
 
@@ -36,9 +36,26 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
     .reduce((acc, val) => [acc[0] + val[0], acc[1] + val[1]], [0, 0])
     .map((sum) => sum / routeCoordinates.length);
 
+  const minLat = Math.min(...routeCoordinates.map((coord) => coord[0]));
+  const maxLat = Math.max(...routeCoordinates.map((coord) => coord[0]));
+  const minLon = Math.min(...routeCoordinates.map((coord) => coord[1]));
+  const maxLon = Math.max(...routeCoordinates.map((coord) => coord[1]));
+
   const { scrollY } = useScrollTracker();
   const mapContainerHeight = routeCoordinates.length * 15;
   const index = Math.floor((scrollY * routeCoordinates.length) / 100);
+
+  const getZoomLevel = () => {
+    const mapWidth = mapContainerRef.current!.clientWidth; // Get the current width of the map container
+
+    // Choose either the latitude or longitude span as the reference
+    const referenceSpan = Math.max(maxLat - minLat, maxLon - minLon);
+
+    // Calculate the zoom level based on the span and the map width
+    const zoomLevel = Math.log2((360 * mapWidth) / (referenceSpan * 512));
+
+    return Math.round(zoomLevel);
+  };
 
   useEffect(() => {
     // Create the Mapbox map instance
@@ -48,7 +65,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
       container: mapContainerRef.current!,
       style: "mapbox://styles/ttavni/clfw18fi4000g01pgluyistb5",
       center: startingCoordinates as LngLatLike,
-      zoom: 10.5,
+      zoom: getZoomLevel() * 0.9,
       pitch: 10,
       transformRequest: transformRequest,
       interactive: false,

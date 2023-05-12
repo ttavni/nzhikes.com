@@ -1,0 +1,17 @@
+{
+  "info": {
+    "introTitle": "Pouakai Tarns",
+    "chipMessages": [
+      "🥾 12.2 km",
+      "🕒 2-3 Hours (Each Way)",
+      "♦️ Medium",
+      "↕️ 782 Elevation Gain",
+      "⛔ Out & Back"
+    ],
+    "reverseAble": false
+  },
+  "pointsOfInterest": {
+    "Pouakai Hut": [174.03747, -39.23519],
+    "Pouakai Reflective Tarn": [174.0472, -39.2338]
+  }
+}

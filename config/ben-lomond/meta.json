@@ -1,0 +1,16 @@
+{
+  "info": {
+    "introTitle": "Ben Lomond via Tiki Trail",
+    "chipMessages": [
+      "🥾 15.3 km",
+      "🕒 5-7 Hours",
+      "♦️ Medium",
+      "↕️ 1446m Elevation Gain",
+      "⛔ Out & Back"
+    ],
+    "reverseAble": false
+  },
+  "pointsOfInterest": {
+    "Ben Lomond": [168.616, -45.0072]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "info": {
+    "introTitle": "Hooker Valley Track",
+    "chipMessages": [
+      "🥾 10.8 km",
+      "🕒 2.5 Hours",
+      "🟢 Easy",
+      "↕️ 203m Elevation Gain",
+      "⛔ Out & Back"
+    ],
+    "reverseAble": false
+  },
+  "pointsOfInterest": {
+    "Picnic Table": [170.09886, -43.70445],
+    "Shelter": [170.096598, -43.697798]
+  }
+}
