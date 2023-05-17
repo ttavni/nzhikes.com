@@ -35,7 +35,17 @@ export default function Page({ params }: any) {
 
   useEffect(() => {
     fetchWalk();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  });
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  useEffect(() => {
+    scrollToTop();
   }, [toggleReverse]);
 
   if (!track) {

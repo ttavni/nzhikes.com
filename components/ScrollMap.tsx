@@ -19,6 +19,8 @@ import { LineString } from "@turf/turf";
 import { IntroCard } from "./IntroCard";
 import { useScrollTracker } from "react-scroll-tracker";
 import Link from "next/link";
+import { Loader } from "./Loading";
+import { ScrollDown } from "./ScrollDown";
 
 const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
@@ -28,6 +30,8 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   const [altitude, setAltitude] = useState(0);
   const [distance, setDistance] = useState(0);
   const [previousBearing, setPreviousBearing] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+  const [initialZoom, setInitialZoom] = useState(12.5);
 
   const routeCoordinates = (route.features[0].geometry as LineString)
     .coordinates;
@@ -60,12 +64,14 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   useEffect(() => {
     // Create the Mapbox map instance
     document.body.style.overflow = "hidden"; //  disable scrolling
+    setLoading(true);
+    setInitialZoom(getZoomLevel() * 0.85);
     mapboxgl.accessToken = process.env.MAPBOX_TOKEN as string;
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current!,
-      style: "mapbox://styles/ttavni/clfw18fi4000g01pgluyistb5",
+      style: "mapbox://styles/ttavni/clhr6yfa4003d01r6g61v8prd/draft",
       center: startingCoordinates as LngLatLike,
-      zoom: getZoomLevel() * 0.9,
+      zoom: initialZoom,
       pitch: 10,
       transformRequest: transformRequest,
       interactive: false,
@@ -78,7 +84,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
           url: "mapbox://mapbox.mapbox-terrain-dem-v1",
           tileSize: 512,
         });
-        map.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
+        map.current.setTerrain({ source: "mapbox-dem", exaggeration: 2 });
       }
     });
 
@@ -161,6 +167,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
           }
         }
 
+        setLoading(false);
         document.body.style.overflow = "unset"; //  allow scrolling once everything loaded
       });
 
@@ -180,7 +187,7 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
         movingLine as Route
       );
 
-      map.current.setZoom(13);
+      map.current.setZoom(13.5);
       map.current.setPitch(50);
       map.current.setCenter([center[0], center[1]]);
 
@@ -196,7 +203,10 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
       const elevation = map.current.queryTerrainElevation(center as LngLatLike);
       setAltitude(Math.round(elevation || 0));
     }
-  }, [index, routeCoordinates, previousBearing]);
+    if (index === 0) {
+      map.current?.setZoom(initialZoom);
+    }
+  }, [index, routeCoordinates, previousBearing, initialZoom]);
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
@@ -207,6 +217,8 @@ const ScrollMap = ({ route, info }: { route: Route; info: any }) => {
   return (
     <>
       <title>{introTitle}</title>
+      {isLoading && <Loader />}
+      {!isLoading && index === 0 && <ScrollDown />}
       {index !== 0 && (
         <Link
           href="/"

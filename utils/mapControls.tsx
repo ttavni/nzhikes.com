@@ -17,7 +17,7 @@ export const bearingDifferenceThreshold = (
 };
 
 export function updateBearing(index: number, routeCoordinates: Coordinates) {
-  const numCoordinatesToAverage = 60;
+  const numCoordinatesToAverage = 40;
   const startRouteCoordinates = routeCoordinates.slice(
     Math.max(0, index - numCoordinatesToAverage),
     index
