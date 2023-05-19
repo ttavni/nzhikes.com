@@ -43,7 +43,7 @@ export default function Home() {
                 <Link key={hike.name} href={`/${hike.name}`}>
                   <div className="stats shadow w-full sm:max-w-sm">
                     <div className="stat p-5">
-                      <div className={`stat-title font-normal`}>
+                      <div className={`stat-title text-info-content text`}>
                         {hike.info.tags.join(" • ")}
                       </div>
                       <div
@@ -53,7 +53,11 @@ export default function Home() {
                       >
                         {formatText(hike.name)}
                       </div>
-                      <div className="stat-desc text font-black">
+                      <div
+                        className={`stat-desc ${
+                          isGreatWalk ? "text-neutral" : "text-neutral"
+                        }`}
+                      >
                         {hike.info.info.chipMessages.slice(0, 3).join(" • ")}
                       </div>
                     </div>
