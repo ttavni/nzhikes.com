@@ -10,6 +10,7 @@
     ],
     "reverseAble": false
   },
+  "tags": ["Day Walk"],
   "pointsOfInterest": {
     "Picnic Table": [170.09886, -43.70445],
     "Shelter": [170.096598, -43.697798]

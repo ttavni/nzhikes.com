@@ -10,6 +10,7 @@
     ],
     "reverseAble": false
   },
+  "tags": ["Day Walk"],
   "pointsOfInterest": {
     "Ben Lomond": [168.616, -45.0072]
   }
