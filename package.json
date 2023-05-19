@@ -13,7 +13,6 @@
     "@types/node": "18.15.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "daisyui": "^2.51.6",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.4",
     "list-react-files": "^0.2.0",

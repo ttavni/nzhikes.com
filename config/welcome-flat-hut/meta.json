@@ -1,0 +1,18 @@
+{
+  "info": {
+    "introTitle": "Welcome Flat Hut",
+    "chipMessages": [
+      "16.4 km",
+      "5 Hours (Each Way)",
+      "Medium",
+      "1243m Elevation Gain",
+      "Out & Back"
+    ],
+    "reverseAble": false
+  },
+  "tags": ["Overnight Hike"],
+  "pointsOfInterest": {
+    "Start": [169.81174, -43.57487],
+    "Welcome Flat Hut": [169.94680111534336, -43.63017537104782]
+  }
+}
