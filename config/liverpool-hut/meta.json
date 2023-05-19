@@ -2,11 +2,11 @@
   "info": {
     "introTitle": "Liverpool Hut",
     "chipMessages": [
-      "🥾 31.9 km",
-      "🕒 6 Hours (Each Way)",
-      "♦️ Hard",
-      "↕️ 1243m Elevation Gain",
-      "⛔ Out & Back"
+      "31.9 km",
+      "6 Hours (Each Way)",
+      "Hard",
+      "1243m Elevation Gain",
+      "Out & Back"
     ],
     "reverseAble": false
   },

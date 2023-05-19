@@ -1,3 +1,4 @@
+import { emojiDecider } from "@/utils/formatText";
 import React from "react";
 
 export const InfoChips = ({ chipMessage }: { chipMessage: string }) => {
@@ -27,7 +28,10 @@ export const IntroCard = ({
         </h5>
         <div className="flex flex-wrap">
           {chipMessages.map((chipMessage) => (
-            <InfoChips key={chipMessage} chipMessage={chipMessage} />
+            <InfoChips
+              key={chipMessage}
+              chipMessage={`${emojiDecider(chipMessage)} ${chipMessage}`}
+            />
           ))}
         </div>
       </a>

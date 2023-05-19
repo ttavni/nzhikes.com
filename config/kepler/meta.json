@@ -2,11 +2,11 @@
   "info": {
     "introTitle": "Kepler Track",
     "chipMessages": [
-      "🥾 60 km",
-      "🕒 3-4 Days",
-      "🔸 Intermediate",
-      "↕️ 2170m Elevation Gain",
-      "🔁 Loop"
+      "60 km",
+      "3-4 Days",
+      "Intermediate",
+      "2170m Elevation Gain",
+      "Loop"
     ],
     "reverseAble": true
   },

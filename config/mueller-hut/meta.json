@@ -2,11 +2,11 @@
   "info": {
     "introTitle": "Mueller Hut",
     "chipMessages": [
-      "🥾 9.7 km",
-      "🕒 5-6 Hours",
-      "🟢 Medium",
-      "↕️ 1053 Elevation Gain",
-      "⛔ Out & Back"
+      "9.7 km",
+      "5-6 Hours",
+      "Medium",
+      "1053 Elevation Gain",
+      "Out & Back"
     ],
     "reverseAble": false
   },

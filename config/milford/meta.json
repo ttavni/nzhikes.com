@@ -2,11 +2,11 @@
   "info": {
     "introTitle": "Milford Track",
     "chipMessages": [
-      "🥾 53.5 km",
-      "🕒 4 Days",
-      "🔸 Intermediate",
-      "↕️ 1750m Elevation Gain",
-      "⛔ Point to point"
+      "53.5 km",
+      "4 Days",
+      "Intermediate",
+      "1750m Elevation Gain",
+      "Point to point"
     ],
     "reverseAble": false
   },
